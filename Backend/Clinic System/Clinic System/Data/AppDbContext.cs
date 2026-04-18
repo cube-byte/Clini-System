@@ -9,7 +9,7 @@ namespace Clinic_System.Data
         {
 
         }
-        public DbSet<Atencion> Atencions { get; set; }
+        public DbSet<Atencion> Atenciones { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Cita> Citas { get; set; }
         public DbSet<DetalleTratamiento> DetalleTratamientos { get; set; }
