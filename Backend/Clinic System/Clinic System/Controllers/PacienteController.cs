@@ -31,6 +31,11 @@ namespace Clinic_System.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Paciente entity)
         {
+            if (!ModelState.IsValid)
+            {
+                var errores = ModelState.Values.SelectMany(v => v.Errors);
+            }
+
             if (ModelState.IsValid)
             {
                 _contexto.Pacientes.Add(entity);

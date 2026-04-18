@@ -19,6 +19,6 @@ namespace Clinic_System.Models
 
         public string Telefono { get; set; }
 
-        public ICollection<Cita> Citas { get; set; }
+        public ICollection<Cita>? Citas { get; set; }
     }
 }
