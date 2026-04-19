@@ -9,6 +9,6 @@ namespace Clinic_System.Models
 
         public string NombreCategoria { get; set; }
 
-        public ICollection<Medicamento> Medicamentos { get; set; }
+        public ICollection<Medicamento>? Medicamentos { get; set; }
     }
 }

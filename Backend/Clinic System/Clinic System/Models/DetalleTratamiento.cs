@@ -17,9 +17,9 @@ namespace Clinic_System.Models
         public int DuracionDias { get; set; }
 
         [ForeignKey("IdTratamiento")]
-        public Tratamiento Tratamiento { get; set; }
+        public Tratamiento? Tratamiento { get; set; }
 
         [ForeignKey("IdMedicamento")]
-        public Medicamento Medicamento { get; set; }
+        public Medicamento? Medicamento { get; set; }
     }
 }

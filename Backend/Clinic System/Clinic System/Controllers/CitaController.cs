@@ -1,6 +1,7 @@
 ﻿using Clinic_System.Data;
 using Clinic_System.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace Clinic_System.Controllers
@@ -20,9 +21,13 @@ namespace Clinic_System.Controllers
             return View(listado);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewBag.Pacientes = _contexto.Pacientes.ToList();
+            ViewBag.Pacientes = new SelectList(
+                await _contexto.Pacientes.ToListAsync(),
+                "IdPaciente",
+                "Nombre"
+            );
             return View();
         }
 
@@ -33,9 +38,19 @@ namespace Clinic_System.Controllers
             {
                 _contexto.Citas.Add(entity);
                 await _contexto.SaveChangesAsync();
+
+                entity.CodigoCita = "C-" + DateTime.Now.Year + "-" + entity.IdCita.ToString("D3");
+
+                _contexto.Citas.Update(entity);
+                await _contexto.SaveChangesAsync();
+
                 return RedirectToAction("Index");
             }
-            ViewBag.Pacientes = _contexto.Pacientes.ToList();
+            ViewBag.Pacientes = new SelectList(
+                await _contexto.Pacientes.ToListAsync(),
+                "IdPaciente",
+                "Nombre"
+            );
             return View(entity);
         }
 

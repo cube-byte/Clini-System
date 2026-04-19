@@ -20,3 +20,70 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.main-container {
+    padding: 40px;
+    background: #ffffff;
+    min-height: 80vh;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border-radius: 10px;
+}
+
+
+/* TABLE */
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Segoe UI, sans-serif;
+}
+
+    .table thead {
+        background: #2c3e50;
+        color: white;
+    }
+
+    .table th {
+        padding: 14px;
+        text-align: left;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+    .table td {
+        padding: 12px 14px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+    .table tbody tr {
+        transition: background 0.2s ease;
+    }
+        .table tbody tr:hover {
+            background: #f5f7fa;
+        }
+    .table a {
+        text-decoration: none;
+        color: #3498db;
+        font-weight: 500;
+    }
+        .table a:hover {
+            text-decoration: underline;
+        }
+
+
+
+/* BOTONES */
+
+.btn-create {
+    display: inline-block;
+    padding: 10px 18px;
+    background: #27ae60;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+    .btn-create:hover {
+        background: #1f8a4c;
+    }

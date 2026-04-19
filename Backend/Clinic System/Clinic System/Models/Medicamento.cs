@@ -17,8 +17,8 @@ namespace Clinic_System.Models
         public int IdCategoria { get; set; }
 
         [ForeignKey("IdCategoria")]
-        public Categoria Categoria { get; set; }
+        public Categoria? Categoria { get; set; }
 
-        public ICollection<DetalleTratamiento> DetalleTratamientos { get; set; }
+        public ICollection<DetalleTratamiento>? DetalleTratamientos { get; set; }
     }
 }

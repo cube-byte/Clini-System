@@ -1,6 +1,7 @@
 ﻿using Clinic_System.Data;
 using Clinic_System.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 public class AtencionController : Controller
@@ -22,9 +23,13 @@ public class AtencionController : Controller
     }
 
    
-    public IActionResult Create()
+    public async Task<IActionResult> Create()
     {
-        ViewBag.Citas = _contexto.Citas.ToList(); 
+        ViewBag.Citas = new SelectList(
+            await _contexto.Citas.ToListAsync(),
+            "IdCita",
+            "CodigoCita"
+        );
         return View();
     }
 
@@ -39,8 +44,11 @@ public class AtencionController : Controller
 
             return RedirectToAction("Index");
         }
-
-        ViewBag.Citas = _contexto.Citas.ToList();
+        ViewBag.Citas = new SelectList(
+            await _contexto.Citas.ToListAsync(),
+            "IdCita",
+            "CodigoCita"
+        );
         return View(entity);
     }
 

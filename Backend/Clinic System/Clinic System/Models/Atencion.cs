@@ -13,8 +13,8 @@ namespace Clinic_System.Models
         public int IdCita { get; set; }
 
         [ForeignKey("IdCita")]
-        public Cita Cita { get; set; }
-        public ICollection<Diagnostico> Diagnosticos { get; set; }
-        public ICollection<Tratamiento> Tratamientos { get; set; }
+        public Cita? Cita { get; set; }
+        public ICollection<Diagnostico>? Diagnosticos { get; set; }
+        public ICollection<Tratamiento>? Tratamientos { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Clinic_System.Data;
 using Clinic_System.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -20,9 +21,13 @@ namespace Clinic_System.Controllers
             return View(await _contexto.Medicamentos.Include(m => m.Categoria).ToListAsync());
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewBag.Categorias = _contexto.Categorias.ToList();
+            ViewBag.Categorias = new SelectList(
+                await _contexto.Categorias.ToListAsync(),
+                "IdCategoria",
+                "NombreCategoria"
+            );
             return View();
         }
 
@@ -35,6 +40,13 @@ namespace Clinic_System.Controllers
                 await _contexto.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+
+            ViewBag.Categorias = new SelectList(
+                await _contexto.Categorias.ToListAsync(),
+                "IdCategoria",
+                "NombreCategoria"
+            );
+
             return View(entity);
         }
 

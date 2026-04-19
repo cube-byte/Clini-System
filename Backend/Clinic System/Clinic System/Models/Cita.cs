@@ -7,6 +7,7 @@ namespace Clinic_System.Models
     {
         [Key]
         public int IdCita { get; set; }
+        public string? CodigoCita { get; set; }
 
         public DateTime FechaCita { get; set; }
 
@@ -14,11 +15,11 @@ namespace Clinic_System.Models
 
         public int IdPaciente { get; set; }
 
-        public string Estado { get; set; }
+        public string Estado { get; set; } = "Pendiente";
 
         [ForeignKey("IdPaciente")]
-        public Paciente Paciente { get; set; }
+        public Paciente? Paciente { get; set; }
 
-        public ICollection<Atencion> Atenciones { get; set; }
+        public ICollection<Atencion>? Atenciones { get; set; }
     }
 }

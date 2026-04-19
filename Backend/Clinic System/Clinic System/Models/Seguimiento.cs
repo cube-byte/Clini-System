@@ -17,6 +17,6 @@ namespace Clinic_System.Models
         public string Descripcion { get; set; }
 
         [ForeignKey("IdTratamiento")]
-        public Tratamiento Tratamiento { get; set; }
+        public Tratamiento? Tratamiento { get; set; }
     }
 }

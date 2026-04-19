@@ -17,10 +17,10 @@ namespace Clinic_System.Models
         public int IdAtencion { get; set; }
 
         [ForeignKey("IdAtencion")]
-        public Atencion Atencion { get; set; }
+        public Atencion? Atencion { get; set; }
 
-        public ICollection<DetalleTratamiento> DetalleTratamientos { get; set; }
+        public ICollection<DetalleTratamiento>? DetalleTratamientos { get; set; }
 
-        public ICollection<Seguimiento> Seguimientos { get; set; }
+        public ICollection<Seguimiento>? Seguimientos { get; set; }
     }
 }
