@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-               Codigo
+                @Html.DisplayNameFor(model => model.CodigoCita)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FechaCita)
@@ -27,15 +27,21 @@
             <th>
                 @Html.DisplayNameFor(model => model.Paciente)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Medico)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoCita)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CodigoCita)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CodigoCita)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FechaCita)
             </td>
@@ -47,6 +53,12 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Paciente.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Medico.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoCita.NombreTipoCita)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdCita">Edit</a> |

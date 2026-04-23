@@ -16,6 +16,7 @@ body {
 
 svg {
     width: 18px;
+    height: 18px;
     margin-right: 8px;
 }
 
@@ -172,4 +173,46 @@ ul {
     .menu-toggle {
         display: block;
     }
+}
+
+.has-submenu .submenu {
+    display: none;
+    flex-direction: column;
+    background-color: rgba(0,0,0,0.15);
+}
+
+/* Items del submenú */
+.submenu li {
+    list-style: none;
+}
+
+.submenu a {
+    padding-left: 20%;
+    font-size: 13px;
+    opacity: 0.85;
+    transition: 0.2s;
+}
+
+    /* Hover elegante */
+    .submenu a:hover {
+        opacity: 1;
+        background-color: #002b50;
+    }
+
+/* Título del menú */
+.menu-title {
+    padding: 6% 6%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+}
+
+    .menu-title:hover {
+        background-color: #001b34;
+    }
+
+/* Animación suave */
+.submenu {
+    transition: all 0.3s ease;
 }

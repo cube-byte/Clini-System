@@ -6,17 +6,20 @@ namespace Clinic_System.Models
     public class Seguimiento
     {
         [Key]
-        public int IdSeguimiento { get; set; }
+        public int IdDetalle { get; set; }
 
         public int IdTratamiento { get; set; }
 
-        public DateTime FechaSeguimiento { get; set; }
+        public int IdMedicamento { get; set; }
 
-        public string Estado { get; set; }
+        public string Dosis { get; set; }
 
-        public string Descripcion { get; set; }
+        public int DuracionDias { get; set; }
 
         [ForeignKey("IdTratamiento")]
         public Tratamiento? Tratamiento { get; set; }
+
+        [ForeignKey("IdMedicamento")]
+        public Medicamento? Medicamento { get; set; }
     }
 }

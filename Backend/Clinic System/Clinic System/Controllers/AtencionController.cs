@@ -22,37 +22,57 @@ public class AtencionController : Controller
         return View(listado);
     }
 
-   
+
     public async Task<IActionResult> Create()
     {
+        var citasDisponibles = await _contexto.Citas
+            .Where(c => !_contexto.Atenciones.Any(a => a.IdCita == c.IdCita))
+            .ToListAsync();
+
         ViewBag.Citas = new SelectList(
-            await _contexto.Citas.ToListAsync(),
+            citasDisponibles,
             "IdCita",
             "CodigoCita"
         );
+
         return View();
     }
 
- 
+
     [HttpPost]
     public async Task<IActionResult> Create(Atencion entity)
     {
+        var yaExiste = await _contexto.Atenciones
+            .AnyAsync(a => a.IdCita == entity.IdCita);
+
+        if (yaExiste)
+        {
+            ModelState.AddModelError("", "Esta cita ya fue atendida.");
+        }
+
         if (ModelState.IsValid)
         {
+
             _contexto.Atenciones.Add(entity);
             await _contexto.SaveChangesAsync();
 
             return RedirectToAction("Index");
         }
+
+        var citasDisponibles = await _contexto.Citas
+            .Where(c => !_contexto.Atenciones.Any(a => a.IdCita == c.IdCita))
+            .ToListAsync();
+
         ViewBag.Citas = new SelectList(
-            await _contexto.Citas.ToListAsync(),
+            citasDisponibles,
             "IdCita",
             "CodigoCita"
         );
+
         return View(entity);
     }
 
-    
+
     public async Task<Atencion?> GetID(int id)
     {
         return await _contexto.Atenciones

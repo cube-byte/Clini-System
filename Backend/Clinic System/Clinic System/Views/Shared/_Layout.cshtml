@@ -19,55 +19,59 @@
         <div class="Navegador">
             <div class="NavTop">
                 <ul>
+
+                    <!-- Dashboard -->
                     <li class="Lista">
-                        <a asp-area="" asp-controller="Home" asp-action="Index">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                            </svg>
+                        <a asp-controller="Home" asp-action="Index">
                             Dashboard
                         </a>
                     </li>
-                    <li class="Lista">
-                        <a asp-area="" asp-controller="Paciente" asp-action="Index">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                            </svg>
-                            Pacientes
-                        </a>
-                    </li>
-                    <li class="Lista">
-                        <a asp-area="" asp-controller="Cita" asp-action="Index">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                            </svg>
 
-                            Citas
-                        </a>
+                    <!-- Pacientes -->
+                    <li class="Lista has-submenu">
+                        <div class="menu-title">Pacientes</div>
+                        <ul class="submenu">
+                            <li><a asp-controller="Paciente" asp-action="Index">Pacientes</a></li>
+                        </ul>
                     </li>
-                    <li class="Lista">
-                        <a asp-area="" asp-controller="Atencion" asp-action="Index" ">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
-                            </svg>
-                            Atenciones
-                        </a>
+
+                    <!-- Médicos -->
+                    <li class="Lista has-submenu">
+                        <div class="menu-title">Médicos</div>
+                        <ul class="submenu">
+                            <li><a asp-controller="Medico" asp-action="Index">Médicos</a></li>
+                            <li><a asp-controller="Especialidad" asp-action="Index">Especialidades</a></li>
+                        </ul>
                     </li>
-                    <li class="Lista">
-                        <a asp-area="" asp-controller="Medicamento" asp-action="Index">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
-                            </svg>
-                            Medicamentos
-                        </a>
+
+                    <!-- Citas -->
+                    <li class="Lista has-submenu">
+                        <div class="menu-title">Citas - Atencion</div>
+                        <ul class="submenu">
+                            <li><a asp-controller="Cita" asp-action="Index">Citas</a></li>
+                            <li><a asp-controller="Atencion" asp-action="Index">Atencion</a></li>
+                            <li><a asp-controller="TipoCita" asp-action="Index">Tipos de Cita</a></li>
+                        </ul>
                     </li>
-                </ul>
-            </div>
-            <div class="NavButtom">
-                <ul>
-                    <li class="ListaFooter"><a href="">Reportes</a></li>
-                    <li class="ListaFooter"><a href="">Privacidad</a></li>
-                    <li class="ListaFooter"><a href="">Accesibilidad</a></li>
-                    <li class="ListaFooter"><a href="">Terminos y condiciones</a></li>
+
+                    <!-- Medicamentos -->
+                    <li class="Lista has-submenu">
+                        <div class="menu-title">Medicamentos</div>
+                        <ul class="submenu">
+                            <li><a asp-controller="Medicamento" asp-action="Index">Medicamentos</a></li>
+                            <li><a asp-controller="Categoria" asp-action="Index">Categorías</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Tratamientos -->
+                    <li class="Lista has-submenu">
+                        <div class="menu-title">Tratamientos</div>
+                        <ul class="submenu">
+                            <li><a asp-controller="Tratamiento" asp-action="Index">Tratamientos</a></li>
+                            <li><a asp-controller="DetalleTratamiento" asp-action="Index">Detalle</a></li>
+                        </ul>
+                    </li>
+
                 </ul>
             </div>
         </div>
@@ -83,8 +87,9 @@
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/_Layout.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

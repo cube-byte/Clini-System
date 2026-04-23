@@ -5,14 +5,16 @@
 }
 
 <h1 class="page-title">Nueva Cita</h1>
-<div asp-validation-summary="All"></div>
+
 <div class="card">
 
-    <form asp-action="Create">
+    <form asp-action="Create" method="post">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         <div class="form-group">
             <label asp-for="FechaCita" class="form-label"></label>
-            <input asp-for="FechaCita"  class="form-input" />
+            <input asp-for="FechaCita" type="datetime-local" class="form-input" />
             <span asp-validation-for="FechaCita" class="text-danger"></span>
         </div>
 
@@ -24,7 +26,26 @@
 
         <div class="form-group">
             <label asp-for="IdPaciente" class="form-label"></label>
-            <select asp-for="IdPaciente" asp-items="ViewBag.Pacientes" class="form-input"></select>
+            <select asp-for="IdPaciente" class="form-input" asp-items="ViewBag.Pacientes">
+                <option value="">Seleccione paciente</option>
+            </select>
+            <span asp-validation-for="IdPaciente" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="IdTipoCita" class="form-label"></label>
+            <select asp-for="IdTipoCita" class="form-input" asp-items="ViewBag.TipoCita">
+                <option value="">Seleccione tipo de cita</option>
+            </select>
+            <span asp-validation-for="IdTipoCita" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="IdMedico" class="form-label"></label>
+            <select asp-for="IdMedico" class="form-input" asp-items="ViewBag.Medico">
+                <option value="">Seleccione médico</option>
+            </select>
+            <span asp-validation-for="IdMedico" class="text-danger"></span>
         </div>
 
         <button type="submit" class="btn btn-primary">Guardar Cita</button>
@@ -33,4 +54,3 @@
     </form>
 
 </div>
-

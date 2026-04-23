@@ -15,11 +15,21 @@ namespace Clinic_System.Models
 
         public int IdPaciente { get; set; }
 
+        public int IdMedico { get; set; }
+
+        public int IdTipoCita { get; set; }
+
+
         public string Estado { get; set; } = "Pendiente";
 
         [ForeignKey("IdPaciente")]
         public Paciente? Paciente { get; set; }
 
-        public ICollection<Atencion>? Atenciones { get; set; }
+        [ForeignKey("IdMedico")]
+        public Medico? Medico { get; set; }
+
+        [ForeignKey("IdTipoCita")]
+        public TipoCita? TipoCita { get; set; }
+        public Atencion? Atencion { get; set; }
     }
 }

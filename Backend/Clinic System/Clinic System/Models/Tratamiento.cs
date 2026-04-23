@@ -12,7 +12,7 @@ namespace Clinic_System.Models
 
         public DateTime? FechaFin { get; set; }
 
-        public string Indicaciones { get; set; }
+        public string? Indicaciones { get; set; }
 
         public int IdAtencion { get; set; }
 
@@ -20,7 +20,5 @@ namespace Clinic_System.Models
         public Atencion? Atencion { get; set; }
 
         public ICollection<DetalleTratamiento>? DetalleTratamientos { get; set; }
-
-        public ICollection<Seguimiento>? Seguimientos { get; set; }
     }
 }

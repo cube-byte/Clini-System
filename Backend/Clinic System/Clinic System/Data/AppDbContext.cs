@@ -18,6 +18,8 @@ namespace Clinic_System.Data
         public DbSet<Paciente> Pacientes { get; set; }
         public DbSet<Seguimiento> Seguimientos { get; set; }
         public DbSet<Tratamiento> Tratamientos { get; set; }
-
+        public DbSet<Medico> Medicos { get; set; }
+        public DbSet<TipoCita> TipoCitas { get; set; }
+        public DbSet<Especialidad> Especialidades { get; set; }
     }
 }

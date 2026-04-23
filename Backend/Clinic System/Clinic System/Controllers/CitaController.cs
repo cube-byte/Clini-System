@@ -17,7 +17,11 @@ namespace Clinic_System.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var listado = await _contexto.Citas.Include(c => c.Paciente).ToListAsync();
+            var listado = await _contexto.Citas
+                .Include(c => c.Paciente)
+                .Include(c => c.Medico)
+                .Include(c => c.TipoCita)
+                .ToListAsync();
             return View(listado);
         }
 
@@ -26,7 +30,17 @@ namespace Clinic_System.Controllers
             ViewBag.Pacientes = new SelectList(
                 await _contexto.Pacientes.ToListAsync(),
                 "IdPaciente",
+                "DNI"
+            );
+            ViewBag.Medico = new SelectList(
+                await _contexto.Medicos.ToListAsync(),
+                "IdMedico",
                 "Nombre"
+            );
+            ViewBag.TipoCita = new SelectList(
+                await _contexto.TipoCitas.ToListAsync(),
+                "IdTipoCita",
+                "NombreTipoCita"
             );
             return View();
         }
@@ -49,7 +63,17 @@ namespace Clinic_System.Controllers
             ViewBag.Pacientes = new SelectList(
                 await _contexto.Pacientes.ToListAsync(),
                 "IdPaciente",
+                "DNI"
+            );
+            ViewBag.Medico = new SelectList(
+                await _contexto.Medicos.ToListAsync(),
+                "IdMedico",
                 "Nombre"
+            );
+            ViewBag.TipoCita = new SelectList(
+                await _contexto.TipoCitas.ToListAsync(),
+                "IdTipoCita",
+                "NombreTipoCita"
             );
             return View(entity);
         }
