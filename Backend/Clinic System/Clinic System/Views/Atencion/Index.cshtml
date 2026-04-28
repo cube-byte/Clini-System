@@ -1,47 +1,86 @@
 ﻿@model IEnumerable<Clinic_System.Models.Atencion>
-
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Atenciones";
 }
 
-<h1>Index</h1>
+<div class="container mt-5">
 
-<p>
-    <a asp-action="Create" class="btn-create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaAtencion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Observacion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cita)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaAtencion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Observacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cita.CodigoCita)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdAtencion">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdAtencion">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdAtencion">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold mb-0">Atenciones Médicas</h2>
+            <small class="text-muted">Listado de atenciones registradas</small>
+        </div>
+        <a asp-action="Create" class="btn btn-primary px-4 fw-semibold">
+            <i class="bi bi-plus-circle me-1"></i> Nueva Atención
+        </a>
+    </div>
+
+    <!-- CARDS -->
+    <div class="row g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="card border-0 shadow-sm rounded-4 h-100">
+                    <div class="card-body p-4">
+
+                        <!-- Badge Estado -->
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="badge rounded-pill px-3 py-2
+                                    @(item.Cita.Estado == "Pendiente" ? "bg-warning text-dark" :
+                                                                    item.Cita.Estado == "Terminado" ? "bg-success" : "bg-info")">
+                            <i class="bi bi-circle-fill me-1" style="font-size:0.5rem"></i>
+                            @item.Cita.Estado
+                        </span>
+                        <small class="text-muted">
+                            <i class="bi bi-ticket-detailed me-1"></i>
+                            @item.Cita.CodigoCita
+                        </small>
+                    </div>
+
+                        <!-- Fecha -->
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="me-2 text-primary">
+                                <i class="bi bi-calendar-check fs-5"></i>
+                            </div>
+                            <div>
+                                <small class="text-muted d-block" style="font-size:0.7rem; letter-spacing:1px;">FECHA ATENCIÓN</small>
+                                <span class="fw-semibold">@item.FechaAtencion.ToString("dd/MM/yyyy HH:mm")</span>
+                            </div>
+                        </div>
+
+                        <!-- Observacion -->
+                        <div class="d-flex align-items-start mb-3">
+                            <div class="me-2 text-primary">
+                                <i class="bi bi-journal-text fs-5"></i>
+                            </div>
+                            <div>
+                                <small class="text-muted d-block" style="font-size:0.7rem; letter-spacing:1px;">OBSERVACIÓN</small>
+                                <span class="fw-semibold">@item.Observacion</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="card-footer border-0 bg-white px-4 pb-4 pt-0 d-flex gap-2">
+                        <a asp-action="Edit" asp-route-id="@item.IdAtencion"
+                           class="btn btn-warning btn-sm px-3 fw-semibold">
+                            <i class="bi bi-pencil-fill me-1"></i> Editar
+                        </a>
+                        <a asp-action="Read" asp-route-id="@item.IdAtencion"
+                           class="btn btn-primary btn-sm px-3 fw-semibold">
+                            <i class="bi bi-eye-fill me-1"></i> Ver
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.IdAtencion"
+                           class="btn btn-danger btn-sm px-3 fw-semibold">
+                            <i class="bi bi-trash-fill me-1"></i> Eliminar
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+                }
+    </div>
+
+</div>

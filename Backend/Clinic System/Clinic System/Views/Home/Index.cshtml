@@ -1,8 +1,99 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model Clinic_System.Models.DashboardVM
+
+@{
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@section Styles {
+    <link rel="stylesheet" href="~/css/dashboard.css" />
+}
+
+<div class="container-fluid dashboard-page">
+
+    <h2 class="dashboard-title">Dashboard</h2>
+    <p class="dashboard-subtitle">Panel principal del sistema clínico</p>
+
+    <div class="row g-4">
+
+        <div class="mt-4">
+            <img src="~/img/img1.jpg"
+                 class="w-100 rounded shadow"
+                 style="height:350px; object-fit:cover; object-position:center 25%;"
+                 alt="Dashboard">
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card dashboard-card">
+                <div class="card-body text-center">
+                    <div class="dashboard-icon text-primary">👥</div>
+                    <p class="dashboard-label">Pacientes</p>
+                    <p class="dashboard-number">@Model.TotalPacientes</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card dashboard-card">
+                <div class="card-body text-center">
+                    <div class="dashboard-icon text-success">🩺</div>
+                    <p class="dashboard-label">Médicos</p>
+                    <p class="dashboard-number">@Model.TotalMedicos</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card dashboard-card">
+                <div class="card-body text-center">
+                    <div class="dashboard-icon text-warning">📅</div>
+                    <p class="dashboard-label">Citas Hoy</p>
+                    <p class="dashboard-number">@Model.CitasHoy</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card dashboard-card">
+                <div class="card-body text-center">
+                    <div class="dashboard-icon text-danger">💊</div>
+                    <p class="dashboard-label">Medicamentos</p>
+                    <p class="dashboard-number">@Model.TotalMedicamentos</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row mt-4">
+
+        <div class="col-lg-8">
+            <div class="quick-box">
+                <h5>Accesos Rápidos</h5>
+
+                <a asp-controller="Paciente" asp-action="Index"
+                   class="btn btn-primary btn-action me-2">
+                    Pacientes
+                </a>
+
+                <a asp-controller="Medico" asp-action="Index"
+                   class="btn btn-success btn-action me-2">
+                    Médicos
+                </a>
+
+                <a asp-controller="Cita" asp-action="Index"
+                   class="btn btn-warning btn-action">
+                    Citas
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="quick-box">
+                <h5>Fecha Actual</h5>
+                <h4>@DateTime.Now.ToString("dd/MM/yyyy")</h4>
+            </div>
+        </div>
+
+    </div>
+
 </div>

@@ -82,32 +82,65 @@ namespace Clinic_System.Controllers
             => await _contexto.Citas.Include(c => c.Paciente)
                .FirstOrDefaultAsync(c => c.IdCita == id);
 
+        [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var entity = await GetID(id);
-            if (entity == null) return RedirectToAction("Error404", "Home");
+            var cita = await _contexto.Citas.FindAsync(id);
 
-            ViewBag.Pacientes = _contexto.Pacientes.ToList();
-            return View(entity);
+            if (cita == null)
+                return RedirectToAction("Error404", "Home");
+
+            ViewBag.IdPaciente = new SelectList(_contexto.Pacientes, "IdPaciente", "Nombre", cita.IdPaciente);
+            ViewBag.IdMedico = new SelectList(_contexto.Medicos, "IdMedico", "Nombre", cita.IdMedico);
+            ViewBag.IdTipoCita = new SelectList(_contexto.TipoCitas, "IdTipoCita", "NombreTipoCita", cita.IdTipoCita);
+
+            return View(cita);
         }
-
         [HttpPost]
-        public async Task<IActionResult> Edit(Cita entity)
+        public async Task<IActionResult> Edit(Cita cita)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _contexto.Citas.Update(entity);
-                await _contexto.SaveChangesAsync();
-                return RedirectToAction("Index");
+                ViewBag.IdPaciente = new SelectList(_contexto.Pacientes, "IdPaciente", "Nombre", cita.IdPaciente);
+                ViewBag.IdMedico = new SelectList(_contexto.Medicos, "IdMedico", "Nombre", cita.IdMedico);
+                ViewBag.IdTipoCita = new SelectList(_contexto.TipoCitas, "IdTipoCita", "NombreTipoCita", cita.IdTipoCita);
+
+                return View(cita);
             }
-            return View(entity);
+
+            _contexto.Citas.Update(cita);
+            await _contexto.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Read(int id)
-            => View(await GetID(id));
+        {
+            var cita = await _contexto.Citas
+                .Include(c => c.Paciente)
+                .Include(c => c.Medico)
+                .Include(c => c.TipoCita)
+                .FirstOrDefaultAsync(c => c.IdCita == id);
+
+            if (cita == null)
+                return RedirectToAction("Error404", "Home");
+
+            return View(cita);
+        }
 
         public async Task<IActionResult> Delete(int id)
-            => View(await GetID(id));
+        {
+            var cita = await _contexto.Citas
+                .Include(c => c.Paciente)
+                .Include(c => c.Medico)
+                .Include(c => c.TipoCita)
+                .FirstOrDefaultAsync(c => c.IdCita == id);
+
+            if (cita == null)
+                return RedirectToAction("Error404", "Home");
+
+            return View(cita);
+        }
 
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> Confirm_Delete(int id)

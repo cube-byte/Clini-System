@@ -15,100 +15,112 @@ namespace Clinic_System.Controllers
             _contexto = contexto;
         }
 
+        // LISTADO
         public async Task<IActionResult> Index()
         {
             var listado = await _contexto.Medicos
-                .Include(a => a.Especialidad)
+                .Include(m => m.Especialidad)
                 .ToListAsync();
+
             return View(listado);
         }
 
-        public async Task<IActionResult> Create()
+        // CARGAR ESPECIALIDADES (REUTILIZABLE)
+        private async Task CargarEspecialidades()
         {
-            ViewBag.Especialidad = new SelectList(
+            ViewBag.IdEspecialidad = new SelectList(
                 await _contexto.Especialidades.ToListAsync(),
                 "IdEspecialidad",
                 "NombreEspecialidad"
             );
+        }
+
+        // CREATE GET
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            await CargarEspecialidades();
             return View();
         }
+
+        // CREATE POST
         [HttpPost]
         public async Task<IActionResult> Create(Medico entity)
         {
             if (!ModelState.IsValid)
             {
-                var errores = ModelState.Values.SelectMany(v => v.Errors);
+                await CargarEspecialidades();
+                return View(entity);
             }
 
-            if (ModelState.IsValid)
-            {
-                _contexto.Medicos.Add(entity);
-                await _contexto.SaveChangesAsync();
+            _contexto.Medicos.Add(entity);
+            await _contexto.SaveChangesAsync();
 
-                return RedirectToAction("Index");
-            }
-            ViewBag.Especialidad = new SelectList(
-                await _contexto.Especialidades.ToListAsync(),
-                "IdEspecialidad",
-                "NombreEspecialidad"
-            );
-            return View(entity);
+            return RedirectToAction(nameof(Index));
         }
 
-        public async Task<Medico?> GetID(int id)
-        {
-            return await _contexto.Medicos.FindAsync(id);
-        }
-
+        // EDIT GET
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var entity = await GetID(id);
+            var entity = await _contexto.Medicos.FindAsync(id);
+
             if (entity == null)
-            {
                 return RedirectToAction("Error404", "Home");
-            }
+
+            await CargarEspecialidades();
 
             return View(entity);
         }
-
         [HttpPost]
         public async Task<IActionResult> Edit(Medico entity)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _contexto.Medicos.Update(entity);
-                await _contexto.SaveChangesAsync();
-                return RedirectToAction("Index");
+                await CargarEspecialidades();
+                return View(entity);
             }
-            return View(entity);
-        }
 
+            _contexto.Medicos.Update(entity);
+            await _contexto.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
         public async Task<IActionResult> Read(int id)
         {
-            var entity = await GetID(id);
+            var entity = await _contexto.Medicos
+                .Include(m => m.Especialidad)
+                .FirstOrDefaultAsync(m => m.IdMedico == id);
+
+            if (entity == null)
+                return RedirectToAction("Error404", "Home");
+
             return View(entity);
         }
-
+        [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
+            var entity = await _contexto.Medicos
+                .Include(m => m.Especialidad)
+                .FirstOrDefaultAsync(m => m.IdMedico == id);
 
-            var entity = await GetID(id);
+            if (entity == null)
+                return RedirectToAction("Error404", "Home");
+
             return View(entity);
-
         }
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> Confirm_Delete(int id)
         {
-            var entity = await GetID(id);
+            var entity = await _contexto.Medicos.FindAsync(id);
+
             if (entity == null)
-            {
                 return RedirectToAction("Error404", "Home");
-            }
+
             _contexto.Medicos.Remove(entity);
             await _contexto.SaveChangesAsync();
-            return RedirectToAction("Index");
 
+            return RedirectToAction(nameof(Index));
         }
     }
 }

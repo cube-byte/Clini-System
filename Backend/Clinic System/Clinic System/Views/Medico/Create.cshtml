@@ -1,58 +1,103 @@
 ﻿@model Clinic_System.Models.Medico
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Nuevo Médico";
 }
 
-<h1 class="page-title">Nuevo Médico</h1>
+<div class="container mt-5">
 
-<div class="card">
+    <div class="row justify-content-center">
+        <div class="col-lg-9">
 
-    <form asp-action="Create" method="post">
+            <div class="card shadow border-0 rounded-4 overflow-hidden">
 
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <!-- HEADER -->
+                <div class="card-header bg-primary text-white py-3">
+                    <h3 class="mb-0 fw-bold">Registrar Médico</h3>
+                    <small>Complete la información del médico</small>
+                </div>
 
-        <div class="form-group">
-            <label asp-for="Nombre" class="form-label"></label>
-            <input asp-for="Nombre" class="form-input" />
-            <span asp-validation-for="Nombre" class="text-danger"></span>
+                <!-- BODY -->
+                <div class="card-body p-4">
+
+                    <form asp-action="Create">
+
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <div class="row g-4">
+
+                            <div class="col-md-6">
+                                <label asp-for="Nombre" class="form-label fw-semibold"></label>
+                                <input asp-for="Nombre" class="form-control" />
+                                <span asp-validation-for="Nombre" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="Apellido" class="form-label fw-semibold"></label>
+                                <input asp-for="Apellido" class="form-control" />
+                                <span asp-validation-for="Apellido" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="DNI" class="form-label fw-semibold"></label>
+                                <input asp-for="DNI" class="form-control" />
+                                <span asp-validation-for="DNI" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="Telefono" class="form-label fw-semibold"></label>
+                                <input asp-for="Telefono" class="form-control" />
+                                <span asp-validation-for="Telefono" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="Correo" class="form-label fw-semibold"></label>
+                                <input asp-for="Correo" class="form-control" />
+                                <span asp-validation-for="Correo" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="IdEspecialidad" class="form-label fw-semibold"></label>
+
+                                <select asp-for="IdEspecialidad"
+                                        class="form-select"
+                                        asp-items="ViewBag.IdEspecialidad">
+                                    <option value="">-- Seleccione Especialidad --</option>
+                                </select>
+
+                                <span asp-validation-for="IdEspecialidad" class="text-danger small"></span>
+                            </div>
+
+                        </div>
+
+                        <!-- BOTONES -->
+                        <div class="mt-4  justify-content-end gap-2">
+
+                            <button type="submit"
+                                    class="btn btn-primary px-4 fw-semibold">
+                                Guardar Médico
+                            </button>
+
+                            <a asp-action="Index"
+                               class="btn btn-danger px-4">
+                                Cancelar
+                            </a>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
         </div>
-
-        <div class="form-group">
-            <label asp-for="Apellido" class="form-label"></label>
-            <input asp-for="Apellido" class="form-input" />
-            <span asp-validation-for="Apellido" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="DNI" class="form-label"></label>
-            <input asp-for="DNI" class="form-input" />
-            <span asp-validation-for="DNI" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Telefono" class="form-label"></label>
-            <input asp-for="Telefono" class="form-input" />
-            <span asp-validation-for="Telefono" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Correo" class="form-label"></label>
-            <input asp-for="Correo" class="form-input" />
-            <span asp-validation-for="Correo" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="IdEspecialidad" class="form-label"></label>
-            <select asp-for="IdEspecialidad" class="form-input" asp-items="ViewBag.Especialidad">
-                <option value="">Seleccione especialidad</option>
-            </select>
-            <span asp-validation-for="IdEspecialidad" class="text-danger"></span>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Guardar Médico</button>
-        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
-
-    </form>
+    </div>
 
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

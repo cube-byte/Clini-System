@@ -1,0 +1,76 @@
+﻿@model Clinic_System.Models.Medico
+
+@{
+    ViewData["Title"] = "Eliminar Médico";
+}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-header bg-danger text-white py-3">
+                    <h3 class="mb-0 fw-bold">Eliminar Médico</h3>
+                    <small>Esta acción no se puede deshacer</small>
+                </div>
+
+                <div class="card-body p-4">
+
+                    <div class="alert alert-warning">
+                        ¿Seguro que deseas eliminar este médico?
+                    </div>
+
+                    <dl class="row mb-4">
+
+                        <dt class="col-sm-4 fw-bold">Nombre</dt>
+                        <dd class="col-sm-8">@Model.Nombre</dd>
+
+                        <dt class="col-sm-4 fw-bold">Apellido</dt>
+                        <dd class="col-sm-8">@Model.Apellido</dd>
+
+                        <dt class="col-sm-4 fw-bold">DNI</dt>
+                        <dd class="col-sm-8">@Model.DNI</dd>
+
+                        <dt class="col-sm-4 fw-bold">Teléfono</dt>
+                        <dd class="col-sm-8">@Model.Telefono</dd>
+
+                        <dt class="col-sm-4 fw-bold">Correo</dt>
+                        <dd class="col-sm-8">@Model.Correo</dd>
+
+                        <dt class="col-sm-4 fw-bold">Especialidad</dt>
+                        <dd class="col-sm-8">
+                            @Model.Especialidad?.NombreEspecialidad
+                        </dd>
+
+                    </dl>
+
+                    <form asp-action="Delete">
+
+                        <input type="hidden" asp-for="IdMedico" />
+
+                        <div class="d-flex gap-2">
+
+                            <button type="submit"
+                                    class="btn btn-danger px-4 fw-semibold">
+                                Eliminar
+                            </button>
+
+                            <a asp-action="Index"
+                               class="btn btn-primary px-4">
+                                Volver a la lista
+                            </a>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

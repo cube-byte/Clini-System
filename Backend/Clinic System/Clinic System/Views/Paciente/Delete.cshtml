@@ -1,48 +1,72 @@
 ﻿@model Clinic_System.Models.Paciente
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Eliminar Paciente";
 }
 
-<h1 class="page-title">Eliminar Paciente</h1>
+<div class="container mt-5">
 
-<div class="card">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
 
-    <p>¿Seguro que deseas eliminar este paciente?</p>
+            <div class="card shadow border-0 rounded-4">
 
-    <div class="detail-row">
-        <div class="detail-label">Nombre:</div>
-        <div class="detail-value">@Model.Nombre</div>
+                <div class="card-header bg-danger py-3">
+                    <h3 class="mb-0 fw-bold text-dark">Eliminar Paciente</h3>
+                    <small class="text-dark">Esta acción no se puede deshacer</small>
+                </div>
+
+                <div class="card-body p-4">
+
+                    <div class="alert alert-warning">
+                        ¿Seguro que deseas eliminar este paciente?
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-md-4 fw-bold">Nombre:</div>
+                        <div class="col-md-8">@Model.Nombre</div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-md-4 fw-bold">Apellido:</div>
+                        <div class="col-md-8">@Model.Apellido</div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-md-4 fw-bold">DNI:</div>
+                        <div class="col-md-8">@Model.DNI</div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-4 fw-bold">Correo:</div>
+                        <div class="col-md-8">@Model.Correo</div>
+                    </div>
+
+                    <form asp-action="Delete">
+
+                        <input type="hidden" asp-for="IdPaciente" />
+
+                        <div class="d-flex gap-2">
+
+                            <button type="submit"
+                                    class="btn btn-danger px-4 text-dark fw-semibold">
+                                Eliminar
+                            </button>
+
+                            <a asp-action="Index"
+                               class="btn btn-primary px-4 text-dark text-decoration-none">
+                                Volver a la lista
+                            </a>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
     </div>
-
-    <div class="detail-row">
-        <div class="detail-label">Apellido:</div>
-        <div class="detail-value">@Model.Apellido</div>
-    </div>
-
-    <div class="detail-row">
-        <div class="detail-label">DNI:</div>
-        <div class="detail-value">@Model.DNI</div>
-    </div>
-
-    <div class="detail-row">
-        <div class="detail-label">Correo:</div>
-        <div class="detail-value">@Model.Correo</div>
-    </div>
-
-    <br>
-
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="IdPaciente" />
-
-        <button type="submit" class="btn btn-danger">
-            Eliminar
-        </button>
-
-        <a asp-action="Index" class="btn btn-secondary">
-            Cancelar
-        </a>
-
-    </form>
 
 </div>

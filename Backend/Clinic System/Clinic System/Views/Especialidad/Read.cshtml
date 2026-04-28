@@ -1,0 +1,52 @@
+﻿@model Clinic_System.Models.Especialidad
+
+@{
+    ViewData["Title"] = "Detalle Especialidad";
+}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <!-- HEADER -->
+                <div class="card-header bg-secondary text-white py-3">
+                    <h3 class="mb-0 fw-bold">Detalle de Especialidad</h3>
+                    <small>Información registrada</small>
+                </div>
+
+                <!-- BODY -->
+                <div class="card-body p-4">
+
+                    <dl class="row mb-0">
+
+                        <dt class="col-sm-5 fw-bold">Nombre</dt>
+                        <dd class="col-sm-7">@Model.NombreEspecialidad</dd>
+
+                    </dl>
+
+                    <div class="mt-4 d-flex gap-2">
+
+                        <a asp-action="Edit"
+                           asp-route-id="@Model.IdEspecialidad"
+                           class="btn btn-primary px-4">
+                            Editar
+                        </a>
+
+                        <a asp-action="Index"
+                           class="btn btn-danger px-4">
+                            Volver
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

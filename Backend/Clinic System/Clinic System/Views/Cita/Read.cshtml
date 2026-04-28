@@ -1,0 +1,70 @@
+﻿@model Clinic_System.Models.Cita
+
+@{
+    ViewData["Title"] = "Detalle Cita";
+}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <!-- HEADER -->
+                <div class="card-header bg-secondary text-white py-3">
+                    <h3 class="mb-0 fw-bold">Detalle de Cita</h3>
+                    <small>Información completa de la cita médica</small>
+                </div>
+
+                <!-- BODY -->
+                <div class="card-body p-4">
+
+                    <dl class="row mb-0">
+
+                        <dt class="col-sm-4 fw-bold">Código</dt>
+                        <dd class="col-sm-8">@Model.CodigoCita</dd>
+
+                        <dt class="col-sm-4 fw-bold">Fecha</dt>
+                        <dd class="col-sm-8">@Model.FechaCita.ToString("dd/MM/yyyy HH:mm")</dd>
+
+                        <dt class="col-sm-4 fw-bold">Descripción</dt>
+                        <dd class="col-sm-8">@Model.Descripcion</dd>
+
+                        <dt class="col-sm-4 fw-bold">Estado</dt>
+                        <dd class="col-sm-8">@Model.Estado</dd>
+
+                        <dt class="col-sm-4 fw-bold">Paciente</dt>
+                        <dd class="col-sm-8">@Model.Paciente?.Nombre</dd>
+
+                        <dt class="col-sm-4 fw-bold">Médico</dt>
+                        <dd class="col-sm-8">@Model.Medico?.Nombre</dd>
+
+                        <dt class="col-sm-4 fw-bold">Tipo de Cita</dt>
+                        <dd class="col-sm-8">@Model.TipoCita?.NombreTipoCita</dd>
+
+                    </dl>
+
+                    <div class="mt-4 d-flex gap-2">
+
+                        <a asp-action="Edit"
+                           asp-route-id="@Model.IdCita"
+                           class="btn btn-primary px-4">
+                            Editar
+                        </a>
+
+                        <a asp-action="Index"
+                           class="btn btn-danger px-4">
+                            Volver
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

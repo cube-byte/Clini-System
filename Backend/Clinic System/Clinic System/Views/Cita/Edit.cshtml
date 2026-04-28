@@ -1,7 +1,7 @@
 ﻿@model Clinic_System.Models.Cita
 
 @{
-    ViewData["Title"] = "Nueva Cita";
+    ViewData["Title"] = "Editar Cita";
 }
 
 <div class="container mt-5">
@@ -12,27 +12,41 @@
             <div class="card shadow border-0 rounded-4 overflow-hidden">
 
                 <!-- HEADER -->
-                <div class="card-header bg-primary text-white py-3">
-                    <h3 class="mb-0 fw-bold">Registrar Cita</h3>
-                    <small>Complete los datos de la cita médica</small>
+                <div class="card-header bg-warning py-3">
+                    <h3 class="mb-0 fw-bold text-dark">Editar Cita</h3>
+                    <small class="text-dark">Modifique los datos necesarios</small>
                 </div>
 
                 <!-- BODY -->
                 <div class="card-body p-4">
 
-                    <form asp-action="Create" method="post">
+                    <form asp-action="Edit">
 
                         <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
+                        <input type="hidden" asp-for="IdCita" />
+
                         <div class="row g-4">
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
+                                <label asp-for="CodigoCita" class="form-label fw-semibold"></label>
+                                <input asp-for="CodigoCita" class="form-control" />
+                                <span asp-validation-for="CodigoCita" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-4">
                                 <label asp-for="FechaCita" class="form-label fw-semibold"></label>
                                 <input asp-for="FechaCita" type="datetime-local" class="form-control" />
                                 <span asp-validation-for="FechaCita" class="text-danger small"></span>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
+                                <label asp-for="Estado" class="form-label fw-semibold"></label>
+                                <input asp-for="Estado" class="form-control" />
+                                <span asp-validation-for="Estado" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-12">
                                 <label asp-for="Descripcion" class="form-label fw-semibold"></label>
                                 <input asp-for="Descripcion" class="form-control" />
                                 <span asp-validation-for="Descripcion" class="text-danger small"></span>
@@ -42,8 +56,7 @@
                                 <label asp-for="IdPaciente" class="form-label fw-semibold"></label>
                                 <select asp-for="IdPaciente"
                                         class="form-select"
-                                        asp-items="ViewBag.Pacientes">
-                                    <option value="">-- Seleccione paciente --</option>
+                                        asp-items="ViewBag.IdPaciente">
                                 </select>
                                 <span asp-validation-for="IdPaciente" class="text-danger small"></span>
                             </div>
@@ -52,8 +65,7 @@
                                 <label asp-for="IdMedico" class="form-label fw-semibold"></label>
                                 <select asp-for="IdMedico"
                                         class="form-select"
-                                        asp-items="ViewBag.Medico">
-                                    <option value="">-- Seleccione médico --</option>
+                                        asp-items="ViewBag.IdMedico">
                                 </select>
                                 <span asp-validation-for="IdMedico" class="text-danger small"></span>
                             </div>
@@ -62,8 +74,7 @@
                                 <label asp-for="IdTipoCita" class="form-label fw-semibold"></label>
                                 <select asp-for="IdTipoCita"
                                         class="form-select"
-                                        asp-items="ViewBag.TipoCita">
-                                    <option value="">-- Seleccione tipo de cita --</option>
+                                        asp-items="ViewBag.IdTipoCita">
                                 </select>
                                 <span asp-validation-for="IdTipoCita" class="text-danger small"></span>
                             </div>
@@ -71,11 +82,10 @@
                         </div>
 
                         <!-- BOTONES -->
-                        <div class="mt-4 d-flex justify-content-end gap-2">
-
+                        <div class="mt-4 justify-content-end gap-2">
                             <button type="submit"
-                                    class="btn btn-primary px-4 fw-semibold">
-                                Guardar Cita
+                                    class="btn btn-primary text-dark px-4 fw-semibold">
+                                Guardar Cambios
                             </button>
 
                             <a asp-action="Index"

@@ -1,71 +1,90 @@
 ﻿@model IEnumerable<Clinic_System.Models.Cita>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Citas";
 }
 
-<h1>Index</h1>
+<div class="container mt-5">
 
-<p>
-    <a asp-action="Create" class="btn-create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CodigoCita)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaCita)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Paciente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Medico)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TipoCita)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CodigoCita)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaCita)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Paciente.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Medico.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoCita.NombreTipoCita)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdCita">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdCita">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdCita">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h2 class="fw-bold mb-1">Listado de Citas</h2>
+            <p class="text-muted mb-0">Gestión de citas médicas</p>
+        </div>
+
+        <a asp-action="Create" class="btn btn-success px-4">
+            + Nueva Cita
+        </a>
+
+    </div>
+
+    <div class="card shadow border-0 rounded-4">
+
+        <div class="card-body p-0">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle mb-0">
+
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Código</th>
+                            <th>Fecha</th>
+                            <th>Descripción</th>
+                            <th>Estado</th>
+                            <th>Paciente</th>
+                            <th>Médico</th>
+                            <th>Tipo Cita</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.CodigoCita</td>
+                                <td>@item.FechaCita.ToString("dd/MM/yyyy")</td>
+                                <td>@item.Descripcion</td>
+                                <td>@item.Estado</td>
+                                <td>@item.Paciente?.Nombre</td>
+                                <td>@item.Medico?.Nombre</td>
+                                <td>@item.TipoCita?.NombreTipoCita</td>
+
+                                <td class="text-center">
+
+                                    <a asp-action="Edit"
+                                       asp-route-id="@item.IdCita"
+                                       class="btn btn-warning btn-sm px-3 me-1 text-dark text-decoration-none">
+                                        Editar
+                                    </a>
+
+                                    <a asp-action="Read"
+                                       asp-route-id="@item.IdCita"
+                                       class="btn btn-info btn-sm px-3 me-1 text-dark text-decoration-none">
+                                        Detalle
+                                    </a>
+
+                                    <a asp-action="Delete"
+                                       asp-route-id="@item.IdCita"
+                                       class="btn btn-danger btn-sm px-3 text-dark text-decoration-none">
+                                        Eliminar
+                                    </a>
+
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

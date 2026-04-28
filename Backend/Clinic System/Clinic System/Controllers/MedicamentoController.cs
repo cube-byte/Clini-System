@@ -70,6 +70,11 @@ namespace Clinic_System.Controllers
             }
             return View(entity);
         }
+        public async Task<IActionResult> Read(int id)
+        {
+            var entity = await GetID(id);
+            return View(entity);
+        }
 
         public async Task<IActionResult> Delete(int id)
             => View(await GetID(id));

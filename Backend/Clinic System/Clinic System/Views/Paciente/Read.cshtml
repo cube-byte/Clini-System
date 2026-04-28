@@ -1,46 +1,73 @@
 ﻿@model Clinic_System.Models.Paciente
 
 @{
-    ViewData["Title"] = "Read";
+    ViewData["Title"] = "Detalle del Paciente";
 }
 
-<h1 class="page-title">Detalle del Paciente</h1>
+<div class="container mt-5">
 
-<div class="card">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
 
-    <div class="detail-row">
-        <div class="detail-label">Nombre:</div>
-        <div class="detail-value">@Model.Nombre</div>
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-header bg-secondary py-3">
+                    <h3 class="mb-0 fw-bold text-dark">Detalle del Paciente</h3>
+                    <small class="text-dark">Información completa del paciente</small>
+                </div>
+
+                <div class="card-body p-4">
+
+                    <div class="row mb-3">
+                        <div class="col-md-4 fw-bold">Nombre:</div>
+                        <div class="col-md-8">@Model.Nombre</div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4 fw-bold">Apellido:</div>
+                        <div class="col-md-8">@Model.Apellido</div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4 fw-bold">DNI:</div>
+                        <div class="col-md-8">@Model.DNI</div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4 fw-bold">Fecha Nacimiento:</div>
+                        <div class="col-md-8">@Model.FechaNacimiento.ToString("dd/MM/yyyy")</div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4 fw-bold">Correo:</div>
+                        <div class="col-md-8">@Model.Correo</div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-4 fw-bold">Teléfono:</div>
+                        <div class="col-md-8">@Model.Telefono</div>
+                    </div>
+
+                    <div class="d-flex gap-2">
+
+                        <a asp-action="Edit"
+                           asp-route-id="@Model.IdPaciente"
+                           class="btn btn-primary px-4 text-dark text-decoration-none">
+                            Editar
+                        </a>
+
+                        <a asp-action="Index"
+                           class="btn btn-danger px-4 text-dark text-decoration-none">
+                            Volver
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
     </div>
-
-    <div class="detail-row">
-        <div class="detail-label">Apellido:</div>
-        <div class="detail-value">@Model.Apellido</div>
-    </div>
-
-    <div class="detail-row">
-        <div class="detail-label">DNI:</div>
-        <div class="detail-value">@Model.DNI</div>
-    </div>
-
-    <div class="detail-row">
-        <div class="detail-label">Fecha Nacimiento:</div>
-        <div class="detail-value">@Model.FechaNacimiento.ToString("dd/MM/yyyy")</div>
-    </div>
-
-    <div class="detail-row">
-        <div class="detail-label">Correo:</div>
-        <div class="detail-value">@Model.Correo</div>
-    </div>
-
-    <div class="detail-row">
-        <div class="detail-label">Telefono:</div>
-        <div class="detail-value">@Model.Telefono</div>
-    </div>
-
-    <br>
-
-    <a asp-action="Edit" asp-route-id="@Model.IdPaciente" class="btn btn-primary">Editar</a>
-    <a asp-action="Index" class="btn btn-secondary">Volver</a>
 
 </div>

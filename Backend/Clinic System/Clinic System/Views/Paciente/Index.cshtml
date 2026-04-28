@@ -1,65 +1,99 @@
 ﻿@model IEnumerable<Clinic_System.Models.Paciente>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Pacientes";
 }
 
-<h1>Index</h1>
+<div class="container mt-5">
 
-<p>
-    <a asp-action="Create" class="btn-create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Apellido)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DNI)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaNacimiento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Correo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telefono)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Apellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DNI)
-            </td>
-            <td>
-                    @item.FechaNacimiento.ToString("dd/MM/yyyy")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Correo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefono)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdPaciente">Edit</a> |
-                <a asp-action="Read" asp-route-id="@item.IdPaciente">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdPaciente">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h2 class="fw-bold mb-1">Listado de Pacientes</h2>
+            <p class="text-muted mb-0">Administración general de pacientes registrados</p>
+        </div>
+
+        <a asp-action="Create" class="btn btn-success px-4">
+            + Nuevo Paciente
+        </a>
+
+    </div>
+
+    <div class="card shadow border-0 rounded-4">
+
+        <div class="card-body p-0">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle mb-0">
+
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>DNI</th>
+                            <th>Fecha Nacimiento</th>
+                            <th>Correo</th>
+                            <th>Teléfono</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @if (Model.Any())
+                        {
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Nombre</td>
+                                    <td>@item.Apellido</td>
+                                    <td>@item.DNI</td>
+                                    <td>@item.FechaNacimiento.ToString("dd/MM/yyyy")</td>
+                                    <td>@item.Correo</td>
+                                    <td>@item.Telefono</td>
+
+                                    <td class="text-center">
+
+                                        <a asp-action="Edit"
+                                           asp-route-id="@item.IdPaciente"
+                                           class="btn btn-info btn-sm px-3 me-1 text-dark text-decoration-none">
+                                            Editar
+                                        </a>
+
+                                        <a asp-action="Read"
+                                           asp-route-id="@item.IdPaciente"
+                                           class="btn btn-warning btn-sm px-3 me-1 text-dark text-decoration-none">
+                                            Detalle
+                                        </a>
+
+                                        <a asp-action="Delete"
+                                           asp-route-id="@item.IdPaciente"
+                                           class="btn btn-danger btn-sm px-3 text-dark text-decoration-none">
+                                            Eliminar
+                                        </a>
+
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="7" class="text-center py-4 text-muted">
+                                    No hay pacientes registrados.
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

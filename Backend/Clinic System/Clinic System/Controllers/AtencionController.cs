@@ -16,12 +16,11 @@ public class AtencionController : Controller
     public async Task<IActionResult> Index()
     {
         var listado = await _contexto.Atenciones
-            .Include(a => a.Cita) 
+            .Include(a => a.Cita)
             .ToListAsync();
 
         return View(listado);
     }
-
 
     public async Task<IActionResult> Create()
     {
@@ -38,7 +37,6 @@ public class AtencionController : Controller
         return View();
     }
 
-
     [HttpPost]
     public async Task<IActionResult> Create(Atencion entity)
     {
@@ -52,7 +50,6 @@ public class AtencionController : Controller
 
         if (ModelState.IsValid)
         {
-
             _contexto.Atenciones.Add(entity);
             await _contexto.SaveChangesAsync();
 
@@ -72,7 +69,6 @@ public class AtencionController : Controller
         return View(entity);
     }
 
-
     public async Task<Atencion?> GetID(int id)
     {
         return await _contexto.Atenciones
@@ -80,38 +76,55 @@ public class AtencionController : Controller
             .FirstOrDefaultAsync(a => a.IdAtencion == id);
     }
 
-    
     [HttpGet]
     public async Task<IActionResult> Edit(int id)
     {
-        var entity = await GetID(id);
+        var atencion = await _contexto.Atenciones
+            .AsNoTracking()
+            .FirstOrDefaultAsync(a => a.IdAtencion == id);
 
-        if (entity == null)
-        {
+        if (atencion == null)
             return RedirectToAction("Error404", "Home");
-        }
 
-        ViewBag.Citas = _contexto.Citas.ToList();
-        return View(entity);
+        ViewBag.IdCita = await _contexto.Citas
+            .AsNoTracking()
+            .Where(c => !_contexto.Atenciones.Any(a => a.IdCita == c.IdCita)
+                        || c.IdCita == atencion.IdCita) // ✅ mantiene la cita actual
+            .Select(c => new SelectListItem
+            {
+                Value = c.IdCita.ToString(),
+                Text = c.CodigoCita
+            })
+            .ToListAsync();
+
+        return View(atencion);
     }
 
-    
     [HttpPost]
-    public async Task<IActionResult> Edit(Atencion entity)
+    public async Task<IActionResult> Edit(Atencion atencion)
     {
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
-            _contexto.Atenciones.Update(entity);
-            await _contexto.SaveChangesAsync();
+            ViewBag.IdCita = await _contexto.Citas
+                .AsNoTracking()
+                .Where(c => !_contexto.Atenciones.Any(a => a.IdCita == c.IdCita)
+                            || c.IdCita == atencion.IdCita)
+                .Select(c => new SelectListItem
+                {
+                    Value = c.IdCita.ToString(),
+                    Text = c.CodigoCita
+                })
+                .ToListAsync();
 
-            return RedirectToAction("Index");
+            return View(atencion);
         }
 
-        ViewBag.Citas = _contexto.Citas.ToList();
-        return View(entity);
+        _contexto.Atenciones.Update(atencion);
+        await _contexto.SaveChangesAsync();
+
+        return RedirectToAction("Index");
     }
 
-    
     public async Task<IActionResult> Read(int id)
     {
         var entity = await _contexto.Atenciones
@@ -123,14 +136,12 @@ public class AtencionController : Controller
         return View(entity);
     }
 
-    
     public async Task<IActionResult> Delete(int id)
     {
         var entity = await GetID(id);
         return View(entity);
     }
 
-   
     [HttpPost, ActionName("Delete")]
     public async Task<IActionResult> Confirm_Delete(int id)
     {

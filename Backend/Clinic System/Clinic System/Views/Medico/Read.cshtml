@@ -1,0 +1,67 @@
+﻿@model Clinic_System.Models.Medico
+
+@{
+    ViewData["Title"] = "Detalle Médico";
+}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-header bg-secondary text-white py-3">
+                    <h3 class="mb-0 fw-bold">Detalle del Médico</h3>
+                    <small>Información completa</small>
+                </div>
+
+                <div class="card-body p-4">
+
+                    <dl class="row mb-0">
+
+                        <dt class="col-sm-4 fw-bold">Nombre</dt>
+                        <dd class="col-sm-8">@Model.Nombre</dd>
+
+                        <dt class="col-sm-4 fw-bold">Apellido</dt>
+                        <dd class="col-sm-8">@Model.Apellido</dd>
+
+                        <dt class="col-sm-4 fw-bold">DNI</dt>
+                        <dd class="col-sm-8">@Model.DNI</dd>
+
+                        <dt class="col-sm-4 fw-bold">Teléfono</dt>
+                        <dd class="col-sm-8">@Model.Telefono</dd>
+
+                        <dt class="col-sm-4 fw-bold">Correo</dt>
+                        <dd class="col-sm-8">@Model.Correo</dd>
+
+                        <dt class="col-sm-4 fw-bold">Especialidad</dt>
+                        <dd class="col-sm-8">
+                            @Model.Especialidad?.NombreEspecialidad
+                        </dd>
+
+                    </dl>
+
+                    <div class="mt-4 d-flex gap-2">
+
+                        <a asp-action="Edit"
+                           asp-route-id="@Model.IdMedico"
+                           class="btn btn-primary px-4">
+                            Editar
+                        </a>
+
+                        <a asp-action="Index"
+                           class="btn btn-danger px-4">
+                            Volver
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

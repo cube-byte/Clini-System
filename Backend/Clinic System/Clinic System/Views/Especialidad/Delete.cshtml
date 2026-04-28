@@ -1,0 +1,61 @@
+﻿@model Clinic_System.Models.Especialidad
+
+@{
+    ViewData["Title"] = "Eliminar Especialidad";
+}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <!-- HEADER -->
+                <div class="card-header bg-danger text-white py-3">
+                    <h3 class="mb-0 fw-bold">Eliminar Especialidad</h3>
+                    <small>Esta acción no se puede deshacer</small>
+                </div>
+
+                <!-- BODY -->
+                <div class="card-body p-4">
+
+                    <div class="alert alert-warning">
+                        ¿Seguro que deseas eliminar esta especialidad?
+                    </div>
+
+                    <dl class="row mb-4">
+
+                        <dt class="col-sm-5 fw-bold">Nombre</dt>
+                        <dd class="col-sm-7">@Model.NombreEspecialidad</dd>
+
+                    </dl>
+
+                    <form asp-action="Delete">
+
+                        <input type="hidden" asp-for="IdEspecialidad" />
+
+                        <div class="d-flex gap-2">
+
+                            <button type="submit"
+                                    class="btn btn-danger px-4 fw-semibold">
+                                Eliminar
+                            </button>
+
+                            <a asp-action="Index"
+                               class="btn btn-primary px-4">
+                                Volver a la lista
+                            </a>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

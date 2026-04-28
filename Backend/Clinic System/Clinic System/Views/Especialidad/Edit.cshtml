@@ -1,7 +1,7 @@
 ﻿@model Clinic_System.Models.Especialidad
 
 @{
-    ViewData["Title"] = "Nueva Especialidad";
+    ViewData["Title"] = "Editar Especialidad";
 }
 
 <div class="container mt-5">
@@ -12,17 +12,19 @@
             <div class="card shadow border-0 rounded-4 overflow-hidden">
 
                 <!-- HEADER -->
-                <div class="card-header bg-primary text-white py-3">
-                    <h3 class="mb-0 fw-bold">Registrar Especialidad</h3>
-                    <small>Ingrese el nombre de la especialidad</small>
+                <div class="card-header bg-warning py-3">
+                    <h3 class="mb-0 fw-bold text-dark">Editar Especialidad</h3>
+                    <small class="text-dark">Modifique los datos necesarios</small>
                 </div>
 
                 <!-- BODY -->
                 <div class="card-body p-4">
 
-                    <form asp-action="Create">
+                    <form asp-action="Edit">
 
                         <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <input type="hidden" asp-for="IdEspecialidad" />
 
                         <div class="mb-3">
                             <label asp-for="NombreEspecialidad" class="form-label fw-semibold"></label>
@@ -33,15 +35,15 @@
                         <div class="mt-4 d-flex justify-content-end gap-2">
 
                             <button type="submit"
-                                    class="btn btn-primary px-4 fw-semibold">
-                                Guardar
+                                    class="btn btn-primary text-dark px-4 fw-semibold">
+                                Guardar Cambios
                             </button>
+
 
                             <a asp-action="Index"
                                class="btn btn-danger px-4">
                                 Cancelar
                             </a>
-
                         </div>
 
                     </form>
